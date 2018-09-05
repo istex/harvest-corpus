@@ -4,7 +4,7 @@ stat-corpus
 Outil de statistiques descriptives sur les corpus ISTEX extraits par **harvestCorpus.pl**
 
 Permet de faire des statistiques sur les fichiers extraits d’ISTEX en utilisant le fichier 
-de métadonnées `logRequete.txt` (cf. l’option `-v` du programme [`harvestCorpus.pl`](/istex/harvest-corpus)) ou les
+de métadonnées `logRequete.txt` (cf. l’option `-v` du programme [`harvestCorpus.pl`](https://github.com/istex/harvest-corpus)) ou les
 fichiers de métadonnées JSON correspondants aux documents extraits. 
 
 Si les fichiers XML éditeurs ont été extraits, il permet aussi de vérifier s’ils ont ou non
