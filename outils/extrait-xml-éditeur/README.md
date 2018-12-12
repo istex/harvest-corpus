@@ -24,7 +24,7 @@ fichiers XML sont extraits pour libérer de l’espace disque.
     -h  affiche cette aide
     -l  indique le nom du fichier “log” recevant les messages d’erreur (ou autres) du programme 
         (N.B. : ce fichier n’est pas écrasé lorsque l’on relance le programme)
-    -r  indique le répertoire où se trouve les fichiers “.zip” déchargés par le programme 
+    -r  indique le répertoire où se trouvent les fichiers “.zip” déchargés par le programme 
         “harvestCorpus.pl” et d’où doivent être extraits les fichiers XML éditeurs.
     -s  supprime le fichier “.zip” si le fichier XML a été extrait avec succès.
 ```
