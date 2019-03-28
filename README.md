@@ -83,7 +83,7 @@ distribution standard de **Perl**. Normalement, les seuls modules à installer s
 
 ### Authentification
 
-Le téléchargement de certains fichiers, notamment le texte intégral, à partir d’ISTEX n’est autorisé qu’aux membres de l’ESR (**E**nseignement **S**upérieur et **R**echerche). Si vous n’avez pas une authentification par adresse IP, il vous faut obtenir un jeton d’accès à l’adresse “**https://api.istex.fr/token/**”. Après avoir sélectionné votre organisme de tutelle et vous être identifié, vous serez dirigé vers une page au format JSON contenant deux “clés” :
+Le téléchargement de certains fichiers, notamment le texte intégral, à partir d’ISTEX n’est autorisé qu’aux membres de l’ESR (**E**nseignement **S**upérieur et **R**echerche). Si vous n’avez pas une authentification par adresse IP, il vous faut obtenir un jeton d’accès à l’adresse “**[https://api.istex.fr/token/](https://api.istex.fr/token/)**”. Après avoir sélectionné votre organisme de tutelle et vous être identifié, vous serez dirigé vers une page au format JSON contenant deux “clés” :
  - “*_comment*” : indication sur l’emploi du jeton d’accès (à ne pas suivre dans le cas présent), 
  - “*_accessToken*” : donnant le jeton d’accès à utiliser avec l’option `-j`.
 
