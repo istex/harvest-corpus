@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 
 # Déclaration des pragmas
@@ -16,8 +16,8 @@ my $usage = "Usage : \n" .
             "    $programme -f fichier [ -e expression_régulière ] [ -l log ] [ -s ] \n" .
             "    $programme -h \n";
 
-my $version     = "1.5.2";
-my $dateModif   = "2 Mai 2018";
+my $version     = "1.5.3";
+my $dateModif   = "28 Septembre 2018";
 
 # Variables nécessaires pour les options
 my $aide       = undef;
@@ -295,7 +295,7 @@ if ( $#pdf == 0 ) {
 	my ($debut) = $pdf[0] =~ /^(.+)\.pdf/io;
 	my @cibles = grep(/^$debut.xml\z/i, @xml);
 	if ( $#cibles == 0 ) {
-		my ($racine) = $cibles[0] =~ m|^(?:.*/)?(.+)\.xml\z|o;
+		my ($racine) = $cibles[0] =~ m|^(?:.*/)?(.+)\.xml\z|io;
 		my $retour = system "unzip -jo \"$directory/$file\" \"$cibles[0]\" > /dev/null";
 		if ( $retour ) {
 			my $erreur = ($retour - ($retour % 256)) / 256;

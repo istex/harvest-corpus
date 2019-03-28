@@ -8,6 +8,8 @@ métadonnées ([JSON](https://fr.wikipedia.org/wiki/JavaScript_Object_Notation),
 à partir d’une requête ou d’un fichier [`.corpus`](#1---fichier-). Permet également de renommer les 
 fichiers déchargés et de générer un fichier de notices bibliographiques. 
 
+Il est possible d’avoir ce programme, ainsi que les utilitaires présents dans le répertoire “outils”, sous forme d’une image [Docker](#docker).
+
 
 ### Prérequis
 
@@ -21,6 +23,7 @@ distribution standard de **Perl**. Normalement, les seuls modules à installer s
 
 ### Usage
 ```
+    harvestCorpus.pl -o 'requête'
     harvestCorpus.pl -q 'requête' [ -a | -emt <type de fichier>[,<type de fichier>]* ]
                      [ -d destination ] [ -n [notices.txt]] [ -p préfixe ] [ -s fichier.corpus ]
                      [ -l nombre ] [ -r [nombre]] [ -iv ] [ -j jeton ]  [ -z [gzip|bzip2]]
@@ -52,6 +55,9 @@ distribution standard de **Perl**. Normalement, les seuls modules à installer s
        soit “json”, “mods” ou “xml”
    -n  crée un fichier de notices bibliographiques (sans argument, crée le fichier
        “notices.txt” dans le répertoire courant ou celui donné par l’option “-d”)
+   -o  indique la requête à tester, entre simples quotes en présence de blancs ou de
+       caractères spéciaux, et simplement retourne le nombre de documents attendus ou
+       un message d’erreur
    -p  indique le préfixe utilisé pour renommer les fichiers téléchargés (par défaut, “f”).
        Ce préfixe est ensuite suivi d’un numéro séquentiel et de l’extension correspondant
        au type de document téléchargé. Si la valeur de l’option “-p” est “0” (le chiffre, 
@@ -77,7 +83,7 @@ distribution standard de **Perl**. Normalement, les seuls modules à installer s
 
 ### Authentification
 
-Le téléchargement de certains fichiers, notamment le texte intégral, à partir d’ISTEX n’est autorisé qu’aux membres de l’ESR (**E**nseignement **S**upérieur et **R**echerche). Si vous n’avez pas une authentification par adresse IP, il vous faut obtenir un jeton d’accès à l’adresse **“https://api.istex.fr/token/”**. Après avoir sélectionné votre organisme de tutelle et vous être identifié, vous serez dirigé vers une page au format JSON contenant deux “clés” :
+Le téléchargement de certains fichiers, notamment le texte intégral, à partir d’ISTEX n’est autorisé qu’aux membres de l’ESR (**E**nseignement **S**upérieur et **R**echerche). Si vous n’avez pas une authentification par adresse IP, il vous faut obtenir un jeton d’accès à l’adresse “**https://api.istex.fr/token/**”. Après avoir sélectionné votre organisme de tutelle et vous être identifié, vous serez dirigé vers une page au format JSON contenant deux “clés” :
  - “*_comment*” : indication sur l’emploi du jeton d’accès (à ne pas suivre dans le cas présent), 
  - “*_accessToken*” : donnant le jeton d’accès à utiliser avec l’option `-j`.
 
@@ -213,3 +219,25 @@ LO : PII 0148-9062(92)94075-3 ; DOI 10.1016/0148-9062(92)94075-3
    
 ...
 ```
+
+### Docker
+
+Pour construire une image Docker, faire :
+
+```
+   docker build -t istex/corpus .
+```
+
+Dans l’exemple suivant, on utilise `harvestCorpus.pl` à partir de son image Docker dans le cas où on veut télécharger des métadonnées à l’aide d’un fichier `.corpus` en supposant que :
+
+* l’utilisateur à l’identifiant (ou [UID](https://fr.wikipedia.org/wiki/User_identifier)) 1002
+* l’utilisateur à l’identifiant de groupe (ou [GID](https://fr.wikipedia.org/wiki/Groupe_%28Unix%29)) 400
+* le fichier `.corpus` s’appelle “**exemple.corpus**”
+* le répertoire devant recevoir les fichiers téléchargés s’appelle “**Metadata**”
+* et le fichier `.corpus` comme le répertoire sont dans le répertoire courant
+
+```
+   docker run --rm -u 1002:400 -v `pwd`:/tmp istex/corpus harvestCorpus -c exemple.corpus -m json,mods -d Metadata
+```
+
+À noter que les programmes dans cette image Docker, comme défini dans le fichier “**Dockerfile**”, n'ont pas d’extension `.pl`.
