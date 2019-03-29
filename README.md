@@ -83,7 +83,7 @@ distribution standard de **Perl**. Normalement, les seuls modules à installer s
 
 ### Authentification
 
-Le téléchargement de certains fichiers, notamment le texte intégral, à partir d’ISTEX n’est autorisé qu’aux membres de l’ESR (**E**nseignement **S**upérieur et **R**echerche). Si vous n’avez pas une authentification par adresse IP, il vous faut obtenir un jeton d’accès à l’adresse “**[https://api.istex.fr/token/](https://api.istex.fr/token/)**”. Après avoir sélectionné votre organisme de tutelle et vous être identifié, vous serez dirigé vers une page au format JSON contenant deux “clés” :
+Le téléchargement de certains fichiers, notamment le texte intégral, à partir d’ISTEX n’est autorisé qu’aux membres de l’ESR (**E**nseignement **S**upérieur et **R**echerche). Si vous n’avez pas une authentification par adresse IP, il vous faut obtenir un jeton d’accès à l’adresse “**https://api.istex.fr/token/**”. Après avoir sélectionné votre organisme de tutelle et vous être identifié, vous serez dirigé vers une page au format JSON contenant deux “clés” :
  - “*_comment*” : indication sur l’emploi du jeton d’accès (à ne pas suivre dans le cas présent), 
  - “*_accessToken*” : donnant le jeton d’accès à utiliser avec l’option `-j`.
 
@@ -228,6 +228,14 @@ Pour construire une image Docker, faire :
    docker build -t istex/corpus .
 ```
 
+En plus du script `harvestCorpus.pl`, l’image Docker ainsi construite contient les scripts :
+
+* extraitXmlEditeur.pl : extraction des fichiers XML éditeurs depuis les fichiers ZIP téléchargés
+* ligature.pl          : remplacement des ligatures dans les fichiers textes (notamment ceux issus de PDF)
+* statsCorpus.pl       : statistiques descriptives sur les corpus ISTEX extraits par `harvestCorpus.pl`
+
+À noter que les programmes dans cette image Docker, comme défini dans le fichier “**Dockerfile**”, n'ont pas d’extension `.pl`.
+
 Dans l’exemple suivant, on utilise `harvestCorpus.pl` à partir de son image Docker dans le cas où on veut télécharger des métadonnées à l’aide d’un fichier `.corpus` en supposant que :
 
 * l’utilisateur à l’identifiant (ou [UID](https://fr.wikipedia.org/wiki/User_identifier)) 1002
@@ -240,4 +248,3 @@ Dans l’exemple suivant, on utilise `harvestCorpus.pl` à partir de son image D
    docker run --rm -u 1002:400 -v `pwd`:/tmp istex/corpus harvestCorpus -c exemple.corpus -m json,mods -d Metadata
 ```
 
-À noter que les programmes dans cette image Docker, comme défini dans le fichier “**Dockerfile**”, n'ont pas d’extension `.pl`.
