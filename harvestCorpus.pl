@@ -29,8 +29,8 @@ my $usage = "Usage : \n" .
             "    $substitut [ -f nombre ] [ -j jeton ] [ -z [gzip|bzip2]]\n" . 
             "    $programme -h \n\n";
 
-my $version     = "4.5.1";
-my $dateModif   = "8 Février 2019";
+my $version     = "4.6.1";
+my $dateModif   = "10 Avril 2019";
 
 # Variables
 my $aide            = 0;
@@ -314,6 +314,8 @@ my %langue = initialise();
 # Correspondance entre noms de corpus et éditeurs
 my %pretty = (
         "bmj"                 => "BMJ",
+        "brepols-ebooks"      => "Brepols [e-books]",
+        "brepols-journals"    => "Brepols [journals]",
         "brill-hacco"         => "Brill HACCO",
         "brill-journals"      => "Brill [journals]",
         "cambridge"           => "Cambridge",
@@ -325,6 +327,7 @@ my %pretty = (
         "emerald"             => "Emerald",
         "gsl"                 => "GSL",
         "iop"                 => "IOP",
+        "lavoisier"           => "Lavoisier",
         "nature"              => "Nature",
         "numerique-premium"   => "Numérique Premium",
         "oup"                 => "OUP",
