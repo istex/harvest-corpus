@@ -23,8 +23,8 @@ my $usage = "Usage : \n" .
             "    $substitut [ -f (csv|json|tsv) ] [ -x (normal|lodex) ] \n".
             "    $programme -h \n";
 
-my $version   = "3.7.1";
-my $dateModif = "24 Janvier 2019";
+my $version   = "3.7.2";
+my $dateModif = "11 Avril 2019";
 
 # Variables pour les options
 my $aide        = 0;
@@ -157,28 +157,30 @@ my %langue = langues();
 
 # Liste des noms des éditeurs
 my %nom = (
-        "elsevier"           => "Elsevier",
-        "wiley"              => "Wiley",
-        "springer-journals"  => "Springer (journals)",
-        "oup"                => "OUP",
-        "cambridge"          => "Cambridge",
-        "sage"               => "Sage",
-        "bmj"                => "BMJ",
-        "springer-ebooks"    => "Springer (e-books)",
-        "iop"                => "IOP",
-        "nature"             => "Nature",
-        "rsc-journals"       => "RSC (journals)",
-        "degruyter-journals" => "Degruyter (journals)",
-        "ecco"               => "ECCO",
-        "edp-sciences"       => "EDP Sciences",
-        "emerald"            => "Emerald",
-        "brill-journals"     => "Brill (journals)",
-        "eebo"               => "EEBO",
-        "brepols-journals"   => "Brepols",
-        "rsc-ebooks"         => "RSC (e-books)",
-        "brill-hacco"        => "Brill HACCO",
-        "gsl"                => "GSL",
-        "numerique-premium"  => "Numérique Premium",
+        "bmj"                 => "BMJ",
+        "brepols-ebooks"      => "Brepols [e-books]",
+        "brepols-journals"    => "Brepols [journals]",
+        "brill-hacco"         => "Brill HACCO",
+        "brill-journals"      => "Brill [journals]",
+        "cambridge"           => "Cambridge",
+        "degruyter-journals"  => "Degruyter [journals]",
+        "ecco"                => "ECCO",
+        "edp-sciences"        => "EDP Sciences",
+        "eebo"                => "EEBO",
+        "elsevier"            => "Elsevier",
+        "emerald"             => "Emerald",
+        "gsl"                 => "GSL",
+        "iop"                 => "IOP",
+        "lavoisier"           => "Lavoisier",
+        "nature"              => "Nature",
+        "numerique-premium"   => "Numérique Premium",
+        "oup"                 => "OUP",
+        "rsc-ebooks"          => "RSC [e-books]",
+        "rsc-journals"        => "RSC [journals]",
+        "sage"                => "Sage",
+        "springer-ebooks"     => "Springer [e-books]",
+        "springer-journals"   => "Springer [journals]",
+        "wiley"               => "Wiley",
         );
 
 # Liste des outils utilisés pour générer les catégories
