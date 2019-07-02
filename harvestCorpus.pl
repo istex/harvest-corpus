@@ -29,8 +29,8 @@ my $usage = "Usage : \n" .
             "    $substitut [ -f nombre ] [ -j jeton ] [ -z [gzip|bzip2]]\n" . 
             "    $programme -h \n\n";
 
-my $version     = "4.6.1";
-my $dateModif   = "10 Avril 2019";
+my $version     = "4.6.2";
+my $dateModif   = "7 Juin 2019";
 
 # Variables
 my $aide            = 0;
@@ -59,7 +59,7 @@ my $prefixe         = undef;
 my $random          = undef;
 my $zip             = undef;
 
-eval        {
+eval    {
         $SIG{__WARN__} = sub {usage(1);};
         GetOptions(
                 "all"               => \$all,
