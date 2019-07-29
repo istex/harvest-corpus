@@ -29,8 +29,8 @@ my $usage = "Usage : \n" .
             "    $substitut [ -f nombre ] [ -j jeton ] [ -z [gzip|bzip2]]\n" . 
             "    $programme -h \n\n";
 
-my $version     = "4.6.2";
-my $dateModif   = "7 Juin 2019";
+my $version     = "4.6.3";
+my $dateModif   = "29 Juillet 2019";
 
 # Variables
 my $aide            = 0;
@@ -238,7 +238,7 @@ if ( defined $prefixe ) {
                 }
         elsif ( $prefixe !~ /^[A-Za-z](\w*-)?\w+\z/ ) {
                 $prefixe = "f";
-                print STDERR "Attention : préfixe non-conforme ⇒ utilisation de la valeur par défaut.\n";
+                print STDERR "Attention : préfixe non-conforme ⇒ utilisation de la valeur par défaut.\n";
                 }
         }
 else    {
@@ -560,7 +560,10 @@ if ( $requete ) {
         }
 
 elsif ( $corpus ) {
-        return if $rien;
+        if ( $rien ) {
+                print STDERR "Attention : vous devez indiquer au moins un type de fichier !\n\n";
+                usage(18);
+                }
 
         my $ark   = "";
         my $id    = "";
