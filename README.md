@@ -228,6 +228,15 @@ Pour construire une image Docker, faire :
    docker build -t istex/corpus .
 ```
 
+Si vous utilisez un proxy, ne pas oublier d’indiquer les paramètres correspondants. Par exemple, pour l’INIST, cela donne :
+
+```bash
+docker build --build-arg http_proxy="$http_proxy" \
+             --build-arg https_proxy="$https_proxy" \
+             --build-arg no_proxy="$no_proxy" \
+             -t istex/corpus .
+```
+
 En plus du script `harvestCorpus.pl`, l’image Docker ainsi construite contient les scripts :
 
 * extraitXmlEditeur.pl : extraction des fichiers XML éditeurs depuis les fichiers ZIP téléchargés
