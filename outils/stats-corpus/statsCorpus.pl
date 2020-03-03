@@ -23,8 +23,8 @@ my $usage = "Usage : \n" .
             "    $substitut [ -f (csv|json|tsv) ] [ -x (normal|lodex) ] \n".
             "    $programme -h \n";
 
-my $version   = "3.7.3";
-my $dateModif = "2 Juillet 2019";
+my $version   = "3.7.4";
+my $dateModif = "3 Mars 2020";
 
 # Variables pour les options
 my $aide        = 0;
@@ -157,7 +157,7 @@ my %langue = langues();
 
 # Liste des noms des éditeurs
 my %nom = (
-        "acs"                 => "ACS",
+        "acs"                 => "American Chemical Society",
         "bmj"                 => "BMJ",
         "brepols-ebooks"      => "Brepols [e-books]",
         "brepols-journals"    => "Brepols [journals]",
@@ -184,6 +184,7 @@ my %nom = (
         "sage"                => "Sage",
         "springer-ebooks"     => "Springer [e-books]",
         "springer-journals"   => "Springer [journals]",
+        "taylor-francis"      => "Taylor & Francis",
         "wiley"               => "Wiley",
         );
 
