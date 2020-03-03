@@ -29,8 +29,8 @@ my $usage = "Usage : \n" .
             "    $substitut [ -f nombre ] [ -j jeton ] [ -z [gzip|bzip2]]\n" . 
             "    $programme -h \n\n";
 
-my $version     = "4.6.3";
-my $dateModif   = "29 Juillet 2019";
+my $version     = "4.7.1";
+my $dateModif   = "3 Mars 2020";
 
 # Variables
 my $aide            = 0;
@@ -118,7 +118,9 @@ if ( $aide ) {
         print "       caractères spéciaux, et simplement retourne le nombre de documents attendus ou \n";
         print "       un message d'erreur \n";
         print "   -p  indique le préfixe utilisé pour renommer les fichiers téléchargés (par défaut, “f”).\n";
-        print "       Ce préfixe est ensuite suivi d'un numéro séquentiel et de l'extension correspondant \n";
+        print "       Ce préfixe doit commencer par une lettre suivie de caractères alphanumériques ou \n";
+        print "       de tirets bas (“_”). Les traits d’union sont autorisés au milieu du préfixe. \n";
+        print "       Celui-ci est ensuite suivi d'un numéro séquentiel et de l'extension correspondant \n";
         print "       au type de document téléchargé. Si la valeur de l’option “-p” est “0”, alors \n";
         print "       le fichier garde son nom original, c’est-à-dire l’identifiant ISTEX \n";
         print "   -q  indique la requête à utiliser, entre simples quotes en présence de blancs ou de \n";
@@ -234,14 +236,14 @@ if ( $random and $random < 0 ) {
 
 if ( defined $prefixe ) {
         if ( not $prefixe ) {
-                        $gardeId ++;
+                $gardeId ++;
                 }
         elsif ( $prefixe !~ /^[A-Za-z](\w*-)?\w+\z/ ) {
-                $prefixe = "f";
-                print STDERR "Attention : préfixe non-conforme ⇒ utilisation de la valeur par défaut.\n";
+                print STDERR "Erreur : préfixe non-conforme\n";
+                exit 3;
                 }
         }
-else    {
+elsif ( $requete ) {
         $prefixe = "f";
         }
 
@@ -313,6 +315,7 @@ my %langue = initialise();
 
 # Correspondance entre noms de corpus et éditeurs
 my %pretty = (
+        "acs"                 => "American Chemical Society",
         "bmj"                 => "BMJ",
         "brepols-ebooks"      => "Brepols [e-books]",
         "brepols-journals"    => "Brepols [journals]",
@@ -336,6 +339,7 @@ my %pretty = (
         "sage"                => "Sage",
         "springer-ebooks"     => "Springer [e-books]",
         "springer-journals"   => "Springer [journals]",
+        "taylor-francis"      => "Taylor & Francis",
         "wiley"               => "Wiley",
         );
 
@@ -627,11 +631,14 @@ elsif ( $corpus ) {
                         next if $num <= $from;
                         ($type, $ark, $sep, $nom) = split(/\s+/);
                         $ark = "ark:$ark" if $ark !~ /^ark:/o;
-                        if ( $nom ) {
+                        if ( $prefixe ) {
+                                $nom{$ark} = $prefixe . sprintf($format, $num);
+                                }
+                        elsif ( $nom ) {
                                 $nom{$ark} = $nom;
                                 }
                         else    {
-                                $nom{$ark} = $prefixe . sprintf($format, $num);
+                                $nom{$ark} = 'f' . sprintf($format, $num);
                                 }
                         push(@ark, $ark);
                         }
@@ -639,11 +646,14 @@ elsif ( $corpus ) {
                         $num ++;
                         next if $num <= $from;
                         ($type, $id, $sep, $nom) = split(/\s+/);
-                        if ( $nom ) {
+                        if ( $prefixe ) {
+                                $nom{$id} = $prefixe . sprintf($format, $num);
+                                }
+                        elsif ( $nom ) {
                                 $nom{$id} = $nom;
                                 }
                         else    {
-                                $nom{$id} = $prefixe . sprintf($format, $num);
+                                $nom{$id} = 'f' . sprintf($format, $num);
                                 }
                         push(@id, $id);
                         }
